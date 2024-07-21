@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat Box</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 2px solid #ccc; /* ボーダーを追加 */
+        border-radius: 10px; /* ボーダーの角を丸くする */
+    }
+    .message-container {
+        overflow-y: auto;
+        max-height: 300px;
+    }
+    .message {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 80%;
+    }
+    .user-message {
+        background-color: #e6f2ff;
+        align-self: flex-end;
+    }
+    .bot-message {
+        background-color: #f0f0f0;
+        align-self: flex-start;
+    }
+    .message-text {
+        margin: 0;
+    }
+    .user-input {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+    .me{
+	background-color: #e6f2ff;
+    width:fit-content;
+    margin: 0 auto;
+    }
+    .bot{
+	background-color: #f0f0f0;
+    width:fit-content;
+    margin: 0 auto;
+    }
+</style>
+<div class="me">
+    <p>
+        自分
+    </p>
+</div>
+<div class="bot">
+    <p>
+        相手
+    </p>
+</div>
+</head>
+<body>
+<div class="container">
+    <div class="message-container" id="message-container"></div>
+    <input type="text" id="user-input" class="user-input" placeholder="Type your message...">
+</div>
+
+<script>
+    const messageContainer = document.getElementById('message-container');
+    const userInput = document.getElementById('user-input');
+
+    userInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            const userMessage = userInput.value.trim();
+            if (userMessage !== '') {
+                appendMessage('user', userMessage);
+                respondToUser(userMessage);
+                userInput.value = '';
+            }
+        }
+    });
+
+    function appendMessage(sender, message) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
+        messageDiv.innerHTML = `<p class="message-text">${message}</p>`;
+        messageContainer.appendChild(messageDiv);
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
+
+    function respondToUser(message) {
+        // ここにボットの返答ロジックを記述する
+        // この例ではユーザーが入力したメッセージをそのまま返答している
+        const botMessage = message;
+        setTimeout(() => {
+            appendMessage('bot', botMessage);
+        }, 500);
+    }
+</script>
+<a href="index.html">トップページにもどる</a>
+</body>
+</html>
