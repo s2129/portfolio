@@ -288,6 +288,9 @@ ul{
 #work_s{
   font-size :clamp(0.1rem, 0.6rem + 1.5vw, 3.0rem) ;
 }
+.c-txt.line.a1.b1{
+ margin-left: 40%;
+}
 .sakuseisetumei{
   margin-left: 10%;
 }
